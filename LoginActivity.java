@@ -37,8 +37,8 @@ public class LoginActivity extends AppCompatActivity {
         String username = editTextUsername.getText().toString();
         String password = editTextPassword.getText().toString();
 
-        // Encrypts given password with the same encryption that it was encrypted the first time
-        // and checks if they match.
+        // Encrypts given password with the same encryption that it was encrypted during
+        // registrations and checks if they match.
 
         String testPassword = RegisterActivity.encryptPassword(password);
 
