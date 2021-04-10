@@ -15,6 +15,8 @@ import com.google.android.material.navigation.NavigationView;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
 
+    // Opens home fragment by default
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView.setCheckedItem(R.id.nav_home);
         }
     }
+
+    // Checks what window will be opened when some button is pressed in the navigation view
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -62,6 +66,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    // Keeps track of the navigation views state and opens or closes it accordingly
 
     @Override
     public void onBackPressed() {
