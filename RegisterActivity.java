@@ -64,7 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     // Checks if info is given correctly and fulfills requirements
-    // and then adds them to a file "userInfo.txt".
+    // and then adds them to a SharedPreference "UserInfo".
 
     public void onRegister(View view) {
         String name = editTextName.getText().toString();
@@ -78,6 +78,10 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(this, "Some fields wasn't filled!",
                     Toast.LENGTH_LONG).show();
         } else {
+            
+            // Checks if password fulfills requirements. Booleans keep track of which requirements
+            // are fulfilled and which aren't.
+            
             boolean number = false;
             boolean big = false;
             boolean small = false;
@@ -163,6 +167,10 @@ public class RegisterActivity extends AppCompatActivity {
             number += 1;
             amount = String.valueOf(number);
         }
+        
+        // Every user has a different number after it's data in the "UserInfo". For example 
+        // password:5 and username:5 are info given by the fifth user.
+        
         SharedPreferences sharedPreferences = getSharedPreferences("UserInfo", 0);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("Name:" + amount, name);
