@@ -28,14 +28,14 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
+    private ActiveUserData activeUserData = ActiveUserData.getInstance();
     private EditText editTextName;
     private EditText editTextUsername;
-    private  EditText editTextPassword;
+    private EditText editTextPassword;
     private EditText editTextConfirmed;
     private EditText editTextHometown;
-    private  EditText editTextWeight;
-    private  EditText editTextHeight;
-    private Spinner spinnerGender;
+    private EditText editTextWeight;
+    private EditText editTextHeight;
     private String gender;
     Context context = null;
 
@@ -50,7 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
         editTextHometown = (EditText) findViewById(R.id.editTextHometown);
         editTextWeight = (EditText) findViewById(R.id.editTextWeight);
         editTextHeight = (EditText) findViewById(R.id.editTextHeight);
-        spinnerGender = (Spinner) findViewById(R.id.spinnerGender);
+        Spinner spinnerGender = (Spinner) findViewById(R.id.spinnerGender);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.genders, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -78,10 +78,10 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(this, "Some fields wasn't filled!",
                     Toast.LENGTH_LONG).show();
         } else {
-            
+
             // Checks if password fulfills requirements. Booleans keep track of which requirements
             // are fulfilled and which aren't.
-            
+
             boolean number = false;
             boolean big = false;
             boolean small = false;
@@ -167,10 +167,10 @@ public class RegisterActivity extends AppCompatActivity {
             number += 1;
             amount = String.valueOf(number);
         }
-        
-        // Every user has a different number after it's data in the "UserInfo". For example 
+
+        // Every user has a different number after it's data in the "UserInfo". For example
         // password:5 and username:5 are info given by the fifth user.
-        
+
         SharedPreferences sharedPreferences = getSharedPreferences("UserInfo", 0);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("Name:" + amount, name);
@@ -182,6 +182,10 @@ public class RegisterActivity extends AppCompatActivity {
         editor.putString("Gender:" + amount, gender);
         editor.putString("AmountOfUsers", amount);
         editor.apply();
+
+        // Adds the users weight also to "WeightStorage" where will be all of the users weights
+
+        activeUserData.addWeight(context, weight);
     }
 
     // This method reads user data file and checks if the username that the user gave
