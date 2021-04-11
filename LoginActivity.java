@@ -22,6 +22,7 @@ import java.util.Map;
 public class LoginActivity extends AppCompatActivity {
     private EditText editTextUsername;
     private EditText editTextPassword;
+    private ActiveUserData activeUserData = ActiveUserData.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +70,11 @@ public class LoginActivity extends AppCompatActivity {
                 String[] split = key.split(":", 2);
                 String rightPassword = sharedPreferences.getString("Password:" + split[1], "");
                 if (rightPassword.equals(password)) {
+                    activeUserData.setName(sharedPreferences.getString("Name:" + split[1], ""));
+                    activeUserData.setUsername(username);
+                    activeUserData.setWeight(sharedPreferences.getString("Weight:" + split[1], ""));
+                    activeUserData.setHometown(sharedPreferences.getString("Hometown:" + split[1], ""));
+                    activeUserData.setHeight(sharedPreferences.getString("Height:" + split[1], ""));
                     result = true;
                 }
             }
