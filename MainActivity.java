@@ -9,11 +9,15 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
+    private final ActiveUserData activeUserData = ActiveUserData.getInstance();
 
     // Opens home fragment by default
 
@@ -25,6 +29,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
         drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+
+        // Adds the users name and username to the navigation view header
+
+        View headerView = navigationView.getHeaderView(0);
+        TextView textViewHeaderName = (TextView) headerView.findViewById(R.id.textViewHeadlineName);
+        TextView textViewHeaderUsername = (TextView) headerView.findViewById(R.id.textViewHeadlineUsername);
+        textViewHeaderName.setText(activeUserData.getName());
+        textViewHeaderUsername.setText(activeUserData.getUsername());
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -37,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    // Checks what window will be opened when some button is pressed in the navigation view
+    // Checks what window will be opened when some of the buttons is pressed in the navigation view
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
