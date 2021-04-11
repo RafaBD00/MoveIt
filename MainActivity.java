@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -43,9 +44,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new FragmentHome()).commit();
-            navigationView.setCheckedItem(R.id.nav_home);
+            SharedPreferences preferences = getSharedPreferences("LastOpenWindow", 0);
+            String lastOpened = preferences.getString(activeUserData.getUsername(), "nav_progress");
+            
+            // Here the program opens the window that was the last one open before the app was closed
+            
+            switch (lastOpened) {
+                case "nav_home":
+                    navigationView.setCheckedItem(R.id.nav_home);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new FragmentHome()).commit();
+                    break;
+                case "nav_workout":
+                    navigationView.setCheckedItem(R.id.nav_workout);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new FragmentWorkout()).commit();
+                    break;
+                case "nav_notes":
+                    navigationView.setCheckedItem(R.id.nav_notes);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new FragmentNotes()).commit();
+                    break;
+                case "nav_diet":
+                    navigationView.setCheckedItem(R.id.nav_diet);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new FragmentDiets()).commit();
+                    break;
+                case "nav_progress":
+                    navigationView.setCheckedItem(R.id.nav_progress);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new FragmentProgress()).commit();
+                    break;
+            }
         }
     }
 
@@ -53,26 +83,41 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        SharedPreferences sharedPreferences = getSharedPreferences("LastOpenWindow", 0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        
+        // Here the program keeps track of which window is the latest on to be opened
+        
         switch (item.getItemId()) {
             case R.id.nav_home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new FragmentHome()).commit();
+                editor.putString(activeUserData.getUsername(), "nav_home");
+                editor.apply();
                 break;
             case R.id.nav_notes:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new FragmentNotes()).commit();
+                editor.putString(activeUserData.getUsername(), "nav_notes");
+                editor.apply();
                 break;
             case R.id.nav_diet:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new FragmentDiets()).commit();
+                editor.putString(activeUserData.getUsername(), "nav_diet");
+                editor.apply();
                 break;
             case R.id.nav_workout:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new FragmentWorkout()).commit();
+                editor.putString(activeUserData.getUsername(), "nav_workout");
+                editor.apply();
                 break;
             case R.id.nav_progress:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new FragmentProgress()).commit();
+                editor.putString(activeUserData.getUsername(), "nav_progress");
+                editor.apply();
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
