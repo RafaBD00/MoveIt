@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#DACBCB">
+
     <TextView
+        android:id="@+id/textViewWorkoutHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
-        android:text="Workout page"
-        android:textSize="30sp" />
+        android:layout_marginTop="5dp"
+        android:text="Workouts"
+        android:padding="10dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+    <EditText
+        android:id="@+id/editTextWorkout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/textViewWorkoutHeader"
+        android:background="@color/white"
+        android:cursorVisible="true"
+        android:gravity="start"
+        android:inputType="textMultiLine"
+        android:textCursorDrawable="@color/purple_500"
+        android:padding="10dp"/>
 </RelativeLayout>
