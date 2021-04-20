@@ -23,17 +23,19 @@ import java.util.Objects;
 public class FragmentWorkout extends Fragment {
     private EditText editTextWorkout;
 
+    // This page is a workout page that allows the user to read and update their workouts.
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_workout, container, false);
         editTextWorkout = (EditText) v.findViewById(R.id.editTextWorkout);
-        // Put's all the workouts to the editText fot the user to read
+        // Put's all the workouts to the editText for the user to read.
         SharedPreferences sharedPreferences = Objects.requireNonNull(getContext()).getSharedPreferences(
                 "WorkoutPlans", Context.MODE_PRIVATE);
         String work = sharedPreferences.getString("Workouts", "Workouts");
         editTextWorkout.setText(work);
-        // Saves the changes automatically
+        // Saves the changes made by the user automatically to the file.
         editTextWorkout.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
