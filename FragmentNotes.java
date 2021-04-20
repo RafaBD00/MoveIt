@@ -26,7 +26,7 @@ public class FragmentNotes extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_notes, container, false);
         TextView textView = v.findViewById(R.id.textView2);
-        textView.setText("This is notes page");
+        textView.setText("Notes");
         EditText field = v.findViewById(R.id.EditNote);
         SharedPreferences preference = getContext().getSharedPreferences("SaveNote", Context.MODE_PRIVATE);
         String text = preference.getString("SavedNote", "Write");
