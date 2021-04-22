@@ -8,7 +8,7 @@
     <EditText
         android:id="@+id/EditNote"
         android:layout_width="match_parent"
-        android:layout_height="666dp"
+        android:layout_height="match_parent"
         android:layout_below="@+id/textView2"
         android:layout_marginTop="15dp"
         android:background="#FFFFFF"
@@ -18,7 +18,6 @@
         android:minLines="3"
         android:textColor="@color/black"
         android:textCursorDrawable="@null" />
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -28,7 +27,6 @@
         android:gravity="center"
         android:text="TextView"
         android:textColor="#000000" />
-
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
