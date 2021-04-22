@@ -11,7 +11,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
@@ -46,9 +45,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (savedInstanceState == null) {
             SharedPreferences preferences = getSharedPreferences("LastOpenWindow", 0);
             String lastOpened = preferences.getString(activeUserData.getUsername(), "nav_progress");
-            
+
             // Here the program opens the window that was the last one open before the app was closed
-            
+
             switch (lastOpened) {
                 case "nav_home":
                     navigationView.setCheckedItem(R.id.nav_home);
@@ -70,11 +69,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new FragmentDiets()).commit();
                     break;
+                case "nav_food":
+                    navigationView.setCheckedItem(R.id.nav_food);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new FragmentFood()).commit();
+                    break;
                 case "nav_progress":
                     navigationView.setCheckedItem(R.id.nav_progress);
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new FragmentProgress()).commit();
                     break;
+
+
             }
         }
     }
@@ -85,9 +91,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         SharedPreferences sharedPreferences = getSharedPreferences("LastOpenWindow", 0);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        
+
         // Here the program keeps track of which window is the latest on to be opened
-        
+
         switch (item.getItemId()) {
             case R.id.nav_home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -117,6 +123,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new FragmentProgress()).commit();
                 editor.putString(activeUserData.getUsername(), "nav_progress");
+                editor.apply();
+                break;
+            case R.id.nav_food:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new FragmentFood()).commit();
+                editor.putString(activeUserData.getUsername(), "nav_food");
                 editor.apply();
                 break;
         }
