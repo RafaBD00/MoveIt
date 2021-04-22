@@ -27,10 +27,14 @@ import java.util.Objects;
 public class FragmentProgress extends Fragment {
     private ActiveUserData activeUserData = ActiveUserData.getInstance();
     private EditText editTextAddWeight;
+    private EditText editTextUpdateWeight;
     private TextView textViewBMI;
     private TextView textViewNormalBMI;
     private BarChart barChart;
     private ArrayList<BarEntry> barEntries;
+
+    // This page shows how the users weight has changed, allows the user to update their weight and
+    // counts BMI for the user.
 
     @Nullable
     @Override
@@ -39,6 +43,7 @@ public class FragmentProgress extends Fragment {
         textViewBMI = v.findViewById(R.id.textViewBMI);
         textViewNormalBMI = v.findViewById(R.id.textViewNormalBMI);
         editTextAddWeight = (EditText) v.findViewById(R.id.editTextAddWeight);
+        editTextUpdateWeight = (EditText) v.findViewById(R.id.editTextUpdateHeight);
         barChart = (BarChart) v.findViewById(R.id.barChart);
         createChart(activeUserData.getUsername());
         Button buttonUpdate = (Button) v.findViewById(R.id.buttonUpdateWeight);
@@ -49,9 +54,37 @@ public class FragmentProgress extends Fragment {
                 // and also adds it to "WeightStorage".
                 String newWeight = editTextAddWeight.getText().toString();
                 editTextAddWeight.setText("");
-                activeUserData.addWeight(Objects.requireNonNull(getContext()), newWeight);
-                // Also updates the graph in progress window
-                createChart(activeUserData.getUsername());
+                boolean result = true;
+                char[] weightArray = newWeight.toCharArray();
+                for (char c : weightArray) {
+                    if (!Character.isDigit(c)) {
+                        result = false;
+                    }
+                }
+                if (result) {
+                    activeUserData.addWeight(Objects.requireNonNull(getContext()), newWeight);
+                    // Also updates the graph in progress window
+                    createChart(activeUserData.getUsername());
+                }
+            }});
+        Button buttonUpdateHeight = (Button) v.findViewById(R.id.buttonUpdateHeight);
+        buttonUpdateHeight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Updates the users height. Adds the height to ActiveUserData as current height.
+                String height = editTextUpdateWeight.getText().toString();
+                editTextUpdateWeight.setText("");
+                boolean ifNumber = true;
+                char[] heightArray = height.toCharArray();
+                for (char s : heightArray) {
+                    if (!Character.isDigit(s)) {
+                        ifNumber = false;
+                    }
+                }
+                if (ifNumber) {
+                    activeUserData.setHeight(height);
+                    activeUserData.changeHeight(getContext(), height);
+                }
             }});
         Button buttonBMI = (Button) v.findViewById(R.id.buttonBMI);
         buttonBMI.setOnClickListener(new View.OnClickListener() {
@@ -77,9 +110,7 @@ public class FragmentProgress extends Fragment {
         barChart.clear();
         barChart.getDescription().setEnabled(false);
         barChart.getLegend().setEnabled(false);
-        SharedPreferences sharedPreferences = Objects.requireNonNull(getContext()).getSharedPreferences(
-                "WeightStorage", 0);
-        String allWeights = sharedPreferences.getString(username, "");
+        String allWeights = activeUserData.getAllWeights(getContext(), activeUserData.getUsername());
         String[] arrWeights = allWeights.split(";", 21);
         barEntries = new ArrayList<>();
         float value;
