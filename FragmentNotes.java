@@ -23,6 +23,7 @@ import org.w3c.dom.Text;
 public class FragmentNotes extends Fragment {
     @Nullable
     @Override
+    //This Fuction creates a notes page where the user and make his/her notes.
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_notes, container, false);
         TextView textView = v.findViewById(R.id.textView2);
