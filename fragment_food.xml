@@ -245,10 +245,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textViewResult"
+                android:id="@+id/textViewResult1"
                 android:text=""
                 android:textSize="17sp"
-                android:padding="20dp"/>
+                android:paddingTop="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewResult2"
+                android:text=""
+                android:textSize="17sp"
+                android:paddingBottom="20dp"/>
         </LinearLayout>
 
     </ScrollView>
