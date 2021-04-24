@@ -16,8 +16,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
-
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -26,9 +24,10 @@ public class FragmentFood extends Fragment {
     private boolean emission;
     private String diet;
 
+    //This page calculates food emission estimates. 
+    
     @Nullable
     @Override
-    //This page calculates food emission estimates. 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_food, container, false);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -38,11 +37,13 @@ public class FragmentFood extends Fragment {
                 R.array.emission, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGender.setAdapter(adapter);
-
         spinnerGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String choice = parent.getItemAtPosition(position).toString();
+                
+                // If the item selected is "Yes" private variable "emission" is true.
+                
                 emission = choice.equals("Yes");
             }
             @Override
@@ -72,7 +73,9 @@ public class FragmentFood extends Fragment {
         EditText editTextEggs = v.findViewById(R.id.editTextEggs);
         EditText editTextSalad = v.findViewById(R.id.editTextSalad);
         EditText editTextRestaurant = v.findViewById(R.id.editTextRestaurant);
-        //Function checks given values and calculates total value from them.
+        
+        // Function checks given values and calculates total value from them.
+        
         buttonCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,7 +110,9 @@ public class FragmentFood extends Fragment {
             }});
         return v;
     }
-    //Function makes URl, reads context from the page and returns wanted value.
+    
+    // Function makes URl, reads context from the page and returns wanted value.
+    
     public String findTotal(String diet, String emission, String beef, String pork, String fish,
                             String dairy, String cheese, String rice, String egg, String salad,
                             String restaurant) throws IOException {
@@ -122,9 +127,13 @@ public class FragmentFood extends Fragment {
         while(sc.hasNext()) {
             sb.append(sc.next());
         }
-        //Retrieving the String from the String Buffer object
+        
+        // Retrieving the String from the String Buffer object
+        
         String result = sb.toString();
-        //Removing the HTML tags
+        
+        // Removing the HTML tags
+        
         result = result.replaceAll("<[^>]*>", "");
         String[] arr = result.split(":", 6);
         String total = arr[5];
