@@ -27,6 +27,7 @@ public class FragmentWorkout extends Fragment {
 
     @Nullable
     @Override
+    //This function creates the workoutpage where the user can make his/her workouts.
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_workout, container, false);
         editTextWorkout = (EditText) v.findViewById(R.id.editTextWorkout);
