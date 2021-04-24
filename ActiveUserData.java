@@ -1,6 +1,6 @@
 package com.example.movet;
 
-// Singleton class that keeps track of the active user's data.
+// Singleton class that keeps track of the active user's data and other methods.
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -51,26 +51,36 @@ public class ActiveUserData {
 
     public void addWeight(Context context, String newWeight) {
         this.weight = Double.parseDouble(newWeight);
+        
         // Updates users new weight to the UserInfo file in SharedPreference
+        
         SharedPreferences shared = context.getSharedPreferences("UserInfo", 0);
         SharedPreferences.Editor edit = shared.edit();
         edit.putString("Weight:" + this.currentUser, newWeight);
         edit.apply();
+        
         // Gets all already added values
+        
         SharedPreferences preferences = context.getSharedPreferences("WeightStorage", 0);
         String currentWeight = String.valueOf(this.weight);
         String oldWeights = preferences.getString(this.username, currentWeight);
+        
         // Checks how many weights have been given
+        
         String[] arrWeights = oldWeights.split(";", 21);
         int len = arrWeights.length;
+        
         // Adds the new one after the old ones
+        
         SharedPreferences sharedPreferences = context.getSharedPreferences("WeightStorage", 0);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         if (oldWeights.equals("")) {
             editor.putString(this.username, newWeight);
         } else {
+            
             // Checks if the user has given it's weight 20 times and removes the first so the
             // maximum amount of weights stays at 20 or under
+            
             if (len >= 20) {
                 String[] tempWeights = Arrays.copyOfRange(arrWeights, 1, arrWeights.length);
                 oldWeights = "";
@@ -88,6 +98,7 @@ public class ActiveUserData {
     }
 
     // Changes the users height
+    
     public void changeHeight(Context context, String newHeight) {
         SharedPreferences shared = context.getSharedPreferences("UserInfo", 0);
         SharedPreferences.Editor edit = shared.edit();
