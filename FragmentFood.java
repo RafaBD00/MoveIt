@@ -26,6 +26,8 @@ import androidx.fragment.app.Fragment;
 public class FragmentFood extends Fragment {
     private boolean emission;
     private String diet;
+    
+    // This page estimates the users yearly emission.
 
     @Nullable
     @Override
@@ -73,7 +75,10 @@ public class FragmentFood extends Fragment {
         EditText editTextEggs = v.findViewById(R.id.editTextEggs);
         EditText editTextSalad = v.findViewById(R.id.editTextSalad);
         EditText editTextRestaurant = v.findViewById(R.id.editTextRestaurant);
-
+        
+        // After the button is pressed, it takes all the values in the editTexts and creates an URL. If some of the editTexts are empty or have too big values,
+        // Toast message is shown.
+        
         buttonCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,6 +114,9 @@ public class FragmentFood extends Fragment {
             }});
         return v;
     }
+    
+    // This function takes all the values needed for the URL as parameters and creates it. Then reads the XML page and return the total emission estimate
+    // rounded for 2 decimals.
 
     public String findTotal(String diet, String emission, String beef, String pork, String fish,
                             String dairy, String cheese, String rice, String egg, String salad,
