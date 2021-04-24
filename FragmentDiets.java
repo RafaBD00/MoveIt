@@ -18,14 +18,14 @@ public class FragmentDiets extends Fragment {
     private EditText editTextDiets;
     private ActiveUserData activeUserData = ActiveUserData.getInstance();
 
-    // This page is a workout page that allows the user to read and update their workouts.
+    // This page is a diet page that allows the user to read and update their diets.
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_diets, container, false);
         editTextDiets = (EditText) v.findViewById(R.id.editTextDiets);
-        // Put's all the workouts to the editText for the user to read.
+        // Put's all the diets to the editText for the user to read.
         SharedPreferences sharedPreferences = Objects.requireNonNull(getContext()).getSharedPreferences(
                 "DietList", Context.MODE_PRIVATE);
         String work = sharedPreferences.getString(activeUserData.getUsername(), "Remember to drink a lot of water\nRemember to sleep 8 hours a night\nExcersice at least 5 times a week\n");
