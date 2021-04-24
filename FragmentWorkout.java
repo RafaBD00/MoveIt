@@ -35,7 +35,12 @@ public class FragmentWorkout extends Fragment {
         // Put's all the workouts to the editText for the user to read.
         SharedPreferences sharedPreferences = Objects.requireNonNull(getContext()).getSharedPreferences(
                 "WorkoutPlans", Context.MODE_PRIVATE);
-        String work = sharedPreferences.getString(activeUserData.getUsername(), "Workouts");
+         String work = sharedPreferences.getString(activeUserData.getUsername(), "Workout 1:\n" +
+                        "- 10 x push-ups , 4 sets\n" +
+                        "- 10 x dips , 4 sets\n" +
+                        "- 10 x Crunches , 4 sets\n" +
+                        "- 7 x pull-ups, 3 sets\n" +
+                        "-------------------------------------------------------------------------");
         editTextWorkout.setText(work);
         // Saves the changes made by the user automatically to the file.
         editTextWorkout.addTextChangedListener(new TextWatcher() {
