@@ -1,5 +1,3 @@
-package com.example.movet;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -22,19 +20,19 @@ import java.util.Objects;
 
 public class FragmentWorkout extends Fragment {
     private EditText editTextWorkout;
+    private final ActiveUserData activeUserData = ActiveUserData.getInstance();
 
     // This page is a workout page that allows the user to read and update their workouts.
 
     @Nullable
     @Override
-    //This function creates the workoutpage where the user can make his/her workouts.
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_workout, container, false);
         editTextWorkout = (EditText) v.findViewById(R.id.editTextWorkout);
         // Put's all the workouts to the editText for the user to read.
         SharedPreferences sharedPreferences = Objects.requireNonNull(getContext()).getSharedPreferences(
                 "WorkoutPlans", Context.MODE_PRIVATE);
-        String work = sharedPreferences.getString("Workouts", "Workouts");
+        String work = sharedPreferences.getString(activeUserData.getUsername(), "Workouts");
         editTextWorkout.setText(work);
         // Saves the changes made by the user automatically to the file.
         editTextWorkout.addTextChangedListener(new TextWatcher() {
@@ -50,7 +48,7 @@ public class FragmentWorkout extends Fragment {
                 SharedPreferences preferences = Objects.requireNonNull(getContext()).getSharedPreferences(
                         "WorkoutPlans", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("Workouts", workouts);
+                editor.putString(activeUserData.getUsername(), workouts);
                 editor.apply();
             }
         });
