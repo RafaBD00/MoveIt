@@ -33,7 +33,6 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText editTextUsername;
     private EditText editTextPassword;
     private EditText editTextConfirmed;
-    private EditText editTextHometown;
     private EditText editTextWeight;
     private EditText editTextHeight;
     private String gender;
@@ -47,7 +46,6 @@ public class RegisterActivity extends AppCompatActivity {
         editTextUsername = (EditText) findViewById(R.id.editTextUsername);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         editTextConfirmed = (EditText) findViewById(R.id.editTextConfirm);
-        editTextHometown = (EditText) findViewById(R.id.editTextHometown);
         editTextWeight = (EditText) findViewById(R.id.editTextWeight);
         editTextHeight = (EditText) findViewById(R.id.editTextHeight);
         Spinner spinnerGender = (Spinner) findViewById(R.id.spinnerGender);
@@ -71,10 +69,9 @@ public class RegisterActivity extends AppCompatActivity {
         String username = editTextUsername.getText().toString();
         String password = editTextPassword.getText().toString();
         String confirm = editTextConfirmed.getText().toString();
-        String hometown = editTextHometown.getText().toString();
         String weight = editTextWeight.getText().toString();
         String height = editTextHeight.getText().toString();
-        if (name.equals("")|password.equals("")|confirm.equals("")|hometown.equals("")|weight.equals("")|height.equals("")) {
+        if (name.equals("")|password.equals("")|confirm.equals("")|weight.equals("")|height.equals("")) {
             Toast.makeText(this, "Some fields wasn't filled!",
                     Toast.LENGTH_LONG).show();
         } else {
@@ -129,7 +126,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
             if (notUsed && small && big && special && number) {
                 String newPassword = encryptPassword(password);
-                storeData(name, username, newPassword, hometown, weight, height, gender);
+                storeData(name, username, newPassword, weight, height, gender);
                 Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
@@ -156,7 +153,7 @@ public class RegisterActivity extends AppCompatActivity {
     // This method stores user's information to SharedPreferences called UserInfo. It also contains
     // a total number of accounts created.
 
-    public void storeData(String name, String username, String password, String hometown, String weight, String height, String gender) {
+    public void storeData(String name, String username, String password, String weight, String height, String gender) {
         // Checks how many accounts have been created.
         SharedPreferences preferences = getSharedPreferences("UserInfo", 0);
         String amount = preferences.getString("AmountOfUsers", "");
@@ -176,7 +173,6 @@ public class RegisterActivity extends AppCompatActivity {
         editor.putString("Name:" + amount, name);
         editor.putString("Username:" + amount, username);
         editor.putString("Password:" + amount, password);
-        editor.putString("Hometown:" + amount, hometown);
         editor.putString("Weight:" + amount, weight);
         editor.putString("Height:" + amount, height);
         editor.putString("Gender:" + amount, gender);
