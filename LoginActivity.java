@@ -1,5 +1,3 @@
-package com.example.movet;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -27,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log_in);
+        setContentView(R.layout.activity_login);
         editTextUsername = (EditText) findViewById(R.id.editTextUsername);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
     }
@@ -48,11 +46,7 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         } else {
             editTextPassword.setText("");
-            editTextUsername.setText("");
-            Toast toast = Toast.makeText(this,"Username and password doesn't match",
-                    Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
-            toast.show();
+            Toast.makeText(getApplicationContext(),"Username and password doesn't match",Toast.LENGTH_LONG).show();
         }
     }
 
@@ -73,8 +67,8 @@ public class LoginActivity extends AppCompatActivity {
                     activeUserData.setName(sharedPreferences.getString("Name:" + split[1], ""));
                     activeUserData.setUsername(username);
                     activeUserData.setWeight(sharedPreferences.getString("Weight:" + split[1], ""));
-                    activeUserData.setHometown(sharedPreferences.getString("Hometown:" + split[1], ""));
                     activeUserData.setHeight(sharedPreferences.getString("Height:" + split[1], ""));
+                    activeUserData.setCurrentUser(split[1]);
                     result = true;
                 }
             }
