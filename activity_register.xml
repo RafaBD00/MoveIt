@@ -89,29 +89,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textViewHometown"
-        android:text="Your hometown"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/editTextConfirm"
-        android:textSize="18sp"
-        android:padding="5dp"/>
-    <EditText
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/editTextHometown"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/textViewHometown"
-        android:background="@drawable/round_edittext"
-        android:layout_margin="5dp"
-        android:padding="5dp"
-        android:textAlignment="center"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/textViewGender"
         android:text="Your gender"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/editTextHometown"
+        android:layout_below="@id/editTextConfirm"
         android:textSize="18sp"
         android:padding="5dp"/>
     <Spinner
