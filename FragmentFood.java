@@ -85,9 +85,14 @@ public class FragmentFood extends Fragment {
                 String salad = editTextSalad.getText().toString();
                 String restaurant = editTextRestaurant.getText().toString();
 
-                if (diet.equals("") || beef.equals("") || pork.equals("") || fish.equals("") || dairy.equals("") || cheese.equals("") || rice.equals("") || egg.equals("") || salad.equals("") || restaurant.equals("")){
+                if (beef.equals("") || pork.equals("") || fish.equals("") ||
+                        dairy.equals("") || cheese.equals("") || rice.equals("") || egg.equals("")
+                        || salad.equals("") || restaurant.equals("")) {
                     Toast.makeText(getContext(), "Fill all the boxes!", Toast.LENGTH_LONG).show();
-
+                } else if ((Double.parseDouble(beef) > 200.0) || (Double.parseDouble(pork) > 200.0) || (Double.parseDouble(fish) > 200.0)
+                        || (Double.parseDouble(dairy) > 200.0) || (Double.parseDouble(cheese) > 200.0) || (Double.parseDouble(rice) > 200.0)
+                        || (Double.parseDouble(egg) > 200.0) || (Double.parseDouble(salad) > 200.0) || (Double.parseDouble(restaurant) > 800.0)) {
+                    Toast.makeText(getContext(), "Value can't be more than 200 hundred", Toast.LENGTH_LONG).show();
                 }else{
                     String total = null;
                     try {
@@ -102,8 +107,14 @@ public class FragmentFood extends Fragment {
         return v;
     }
 
-    public String findTotal(String diet, String emission, String beef, String pork, String fish, String dairy, String cheese, String rice, String egg, String salad, String restaurant) throws IOException {
-        String url = "https://ilmastodieetti.ymparisto.fi/ilmastodieetti/calculatorapi/v1/FoodCalculator?query.diet=" + diet + "&query.lowCarbonPreference=" + emission + "&query.beefLevel=" + beef + "&query.fishLevel=" + fish + "&query.porkPoultryLevel=" + pork + "&query.dairyLevel=" +  dairy + "&query.cheeseLevel=" + cheese + "&query.riceLevel=" + rice + "&query.eggLevel=" + egg + "&query.winterSaladLevel=" + salad + "&query.restaurantSpending=" + restaurant;
+    public String findTotal(String diet, String emission, String beef, String pork, String fish,
+                            String dairy, String cheese, String rice, String egg, String salad,
+                            String restaurant) throws IOException {
+        String url = "https://ilmastodieetti.ymparisto.fi/ilmastodieetti/calculatorapi/v1/FoodCalculator?query.diet="
+                + diet + "&query.lowCarbonPreference=" + emission + "&query.beefLevel=" + beef + "&query.fishLevel="
+                + fish + "&query.porkPoultryLevel=" + pork + "&query.dairyLevel=" +  dairy + "&query.cheeseLevel="
+                + cheese + "&query.riceLevel=" + rice + "&query.eggLevel=" + egg + "&query.winterSaladLevel=" +
+                salad + "&query.restaurantSpending=" + restaurant;
         URL page = new URL(url);
         Scanner sc = new Scanner(page.openStream());
         StringBuffer sb = new StringBuffer();
@@ -114,18 +125,11 @@ public class FragmentFood extends Fragment {
         String result = sb.toString();
         //Removing the HTML tags
         result = result.replaceAll("<[^>]*>", "");
-        //System.out.println("Contents of the web page: "+result);
         String[] arr = result.split(":", 6);
         String total = arr[5];
         total = total.replace("}", "");
-
         double absoluteTotal = Double.parseDouble(total);
         absoluteTotal = Math.round(absoluteTotal * 100.0) / 100.0;
-
         return(String.valueOf(absoluteTotal));
-
-
     }
-
-
 }
