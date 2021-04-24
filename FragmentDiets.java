@@ -12,7 +12,7 @@ public class FragmentDiets extends Fragment {
         // Put's all the workouts to the editText for the user to read.
         SharedPreferences sharedPreferences = Objects.requireNonNull(getContext()).getSharedPreferences(
                 "DietList", Context.MODE_PRIVATE);
-        String work = sharedPreferences.getString(activeUserData.getUsername(), "Diet");
+        String work = sharedPreferences.getString(activeUserData.getUsername(), "Remember to drink a lot of water\nRemember to sleep 8 hours a night\nExcersice at least 5 times a week\n");
         editTextDiets.setText(work);
         // Saves the changes made by the user automatically to the file.
         editTextDiets.addTextChangedListener(new TextWatcher() {
