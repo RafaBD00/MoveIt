@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+// This is a home page that for tha app. It has a background photo and it displays the users name.
+
 public class FragmentHome extends Fragment {
     private ActiveUserData activeUserData = ActiveUserData.getInstance();
 
