@@ -21,6 +21,7 @@ public class FragmentDiets extends Fragment {
 
     @Nullable
     @Override
+    //This function creates the dietspage where the user can make his/her diets.
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_diets, container, false);
         editTextDiets = (EditText) v.findViewById(R.id.editTextDiets);
