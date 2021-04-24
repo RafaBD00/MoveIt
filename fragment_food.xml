@@ -4,4 +4,253 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/quote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="This calculates the emission estimate in kg CO2 eq. / year"
+                android:textSize="15sp"
+                android:paddingTop="15dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" for given food consumption habits"
+                android:textSize="15sp"
+                android:paddingBottom="5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="You don't need to be precise."
+                android:textSize="15sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Just estimate your consumption levels."
+                android:textSize="15sp"
+                android:paddingBottom="5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="What is your diet"
+                android:textSize="17sp"
+                android:padding="10dp"/>
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerDiet"
+                android:padding="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Do you prefer low emission foods"
+                android:textSize="17sp"
+                android:padding="10dp"/>
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerEmission"
+                android:padding="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Percentage of beef consumption"
+                android:textSize="17sp"
+                android:paddingTop="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="compared to finnish average?"
+                android:textSize="17sp"
+                android:paddingBottom="10dp"/>
+            <EditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/editTextBeef"
+                android:background="@drawable/round_edittext"
+                android:textAlignment="center"
+                android:padding="5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Percentage of fish consumption"
+                android:textSize="17sp"
+                android:paddingTop="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="compared to finnish average?"
+                android:textSize="17sp"
+                android:paddingBottom="10dp"/>
+            <EditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/editTextFish"
+                android:background="@drawable/round_edittext"
+                android:textAlignment="center"
+                android:padding="5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Percentage of pork and poultry consumption"
+                android:textSize="17sp"
+                android:paddingTop="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="compared to finnish average?"
+                android:textSize="17sp"
+                android:paddingBottom="10dp"/>
+            <EditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/editTextPork"
+                android:background="@drawable/round_edittext"
+                android:textAlignment="center"
+                android:padding="5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Percentage of dairy consumption"
+                android:textSize="17sp"
+                android:paddingTop="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="compared to finnish average?"
+                android:textSize="17sp"
+                android:paddingBottom="10dp"/>
+            <EditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/editTextDairy"
+                android:background="@drawable/round_edittext"
+                android:textAlignment="center"
+                android:padding="5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Percentage of cheese consumption"
+                android:textSize="17sp"
+                android:paddingTop="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="compared to finnish average?"
+                android:textSize="17sp"
+                android:paddingBottom="10dp"/>
+            <EditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/editTextCheese"
+                android:background="@drawable/round_edittext"
+                android:textAlignment="center"
+                android:padding="5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Percentage of rice consumption"
+                android:textSize="17sp"
+                android:paddingTop="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="compared to finnish average?"
+                android:textSize="17sp"
+                android:paddingBottom="10dp"/>
+            <EditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/editTextRice"
+                android:background="@drawable/round_edittext"
+                android:textAlignment="center"
+                android:padding="5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Percentage of eggs consumption"
+                android:textSize="17sp"
+                android:paddingTop="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="compared to finnish average?"
+                android:textSize="17sp"
+                android:paddingBottom="10dp"/>
+            <EditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/editTextEggs"
+                android:background="@drawable/round_edittext"
+                android:textAlignment="center"
+                android:padding="5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Percentage of winter salad consumption"
+                android:textSize="17sp"
+                android:paddingTop="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="compared to finnish average?"
+                android:textSize="17sp"
+                android:paddingBottom="10dp"/>
+            <EditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/editTextSalad"
+                android:background="@drawable/round_edittext"
+                android:textAlignment="center"
+                android:padding="5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="How much do you spent on"
+                android:textSize="17sp"
+                android:paddingTop="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="restaurants per month?"
+                android:textSize="17sp"
+                android:paddingBottom="10dp"/>
+            <EditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/editTextRestaurant"
+                android:background="@drawable/round_edittext"
+                android:textAlignment="center"
+                android:padding="5dp"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonCalculate"
+                android:text="Calculate emission"
+                android:textColor="@color/white"
+                android:background="@drawable/round_edittext"
+                android:backgroundTint="@color/purple_500"
+                android:padding="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewResult"
+                android:text=""
+                android:textSize="17sp"
+                android:padding="20dp"/>
+        </LinearLayout>
+
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
