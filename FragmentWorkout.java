@@ -29,12 +29,16 @@ public class FragmentWorkout extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_workout, container, false);
         editTextWorkout = (EditText) v.findViewById(R.id.editTextWorkout);
+        
         // Put's all the workouts to the editText for the user to read.
+        
         SharedPreferences sharedPreferences = Objects.requireNonNull(getContext()).getSharedPreferences(
                 "WorkoutPlans", Context.MODE_PRIVATE);
         String work = sharedPreferences.getString(activeUserData.getUsername(), "Workouts");
         editTextWorkout.setText(work);
+        
         // Saves the changes made by the user automatically to the file.
+        
         editTextWorkout.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
