@@ -16,6 +16,7 @@ public class FragmentHome extends Fragment {
 
     @Nullable
     @Override
+    //This is the notes page where the user can create his/her own notes.
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         TextView textHello = v.findViewById(R.id.text3);
