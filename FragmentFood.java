@@ -28,6 +28,7 @@ public class FragmentFood extends Fragment {
 
     @Nullable
     @Override
+    //This page calculates food emission estimates. 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_food, container, false);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -60,8 +61,7 @@ public class FragmentFood extends Fragment {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}});
 
-        TextView textViewResult1 = v.findViewById(R.id.textViewResult1);
-        TextView textViewResult2 = v.findViewById(R.id.textViewResult2);
+        TextView textViewResult = v.findViewById(R.id.textViewResult);
         Button buttonCalculate = v.findViewById(R.id.buttonCalculate);
         EditText editTextBeef = v.findViewById(R.id.editTextBeef);
         EditText editTextPork = v.findViewById(R.id.editTextPork);
@@ -72,7 +72,7 @@ public class FragmentFood extends Fragment {
         EditText editTextEggs = v.findViewById(R.id.editTextEggs);
         EditText editTextSalad = v.findViewById(R.id.editTextSalad);
         EditText editTextRestaurant = v.findViewById(R.id.editTextRestaurant);
-
+        //Function checks given values and calculates total value from them.
         buttonCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,14 +101,13 @@ public class FragmentFood extends Fragment {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    textViewResult1.setText("Your emission estimate is:");
-                    textViewResult2.setText( total + " kg CO2 / year");
+                    textViewResult.setText(total);
                 }
 
             }});
         return v;
     }
-
+    //Function makes URl, reads context from the page and returns wanted value.
     public String findTotal(String diet, String emission, String beef, String pork, String fish,
                             String dairy, String cheese, String rice, String egg, String salad,
                             String restaurant) throws IOException {
