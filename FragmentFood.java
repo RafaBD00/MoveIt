@@ -1,6 +1,7 @@
 package com.example.movet;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Scanner;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +30,8 @@ public class FragmentFood extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_food, container, false);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         Spinner spinnerGender = (Spinner) v.findViewById(R.id.spinnerEmission);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
                 R.array.emission, android.R.layout.simple_spinner_item);
@@ -67,9 +76,56 @@ public class FragmentFood extends Fragment {
             @Override
             public void onClick(View v) {
                 String beef = editTextBeef.getText().toString();
-                
+                String pork = editTextPork.getText().toString();
+                String fish = editTextFish.getText().toString();
+                String dairy = editTextDairy.getText().toString();
+                String cheese = editTextCheese.getText().toString();
+                String rice = editTextRice.getText().toString();
+                String egg = editTextEggs.getText().toString();
+                String salad = editTextSalad.getText().toString();
+                String restaurant = editTextRestaurant.getText().toString();
+
+                if (diet.equals("") || beef.equals("") || pork.equals("") || fish.equals("") || dairy.equals("") || cheese.equals("") || rice.equals("") || egg.equals("") || salad.equals("") || restaurant.equals("")){
+                    Toast.makeText(getContext(), "Fill all the boxes!", Toast.LENGTH_LONG).show();
+
+                }else{
+                    String total = null;
+                    try {
+                        total = findTotal(diet, String.valueOf(emission), beef, pork, fish, dairy, cheese, rice, egg, salad, restaurant);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    textViewResult.setText(total);
+                }
+
             }});
         return v;
     }
-}
 
+    public String findTotal(String diet, String emission, String beef, String pork, String fish, String dairy, String cheese, String rice, String egg, String salad, String restaurant) throws IOException {
+        String url = "https://ilmastodieetti.ymparisto.fi/ilmastodieetti/calculatorapi/v1/FoodCalculator?query.diet=" + diet + "&query.lowCarbonPreference=" + emission + "&query.beefLevel=" + beef + "&query.fishLevel=" + fish + "&query.porkPoultryLevel=" + pork + "&query.dairyLevel=" +  dairy + "&query.cheeseLevel=" + cheese + "&query.riceLevel=" + rice + "&query.eggLevel=" + egg + "&query.winterSaladLevel=" + salad + "&query.restaurantSpending=" + restaurant;
+        URL page = new URL(url);
+        Scanner sc = new Scanner(page.openStream());
+        StringBuffer sb = new StringBuffer();
+        while(sc.hasNext()) {
+            sb.append(sc.next());
+        }
+        //Retrieving the String from the String Buffer object
+        String result = sb.toString();
+        //Removing the HTML tags
+        result = result.replaceAll("<[^>]*>", "");
+        //System.out.println("Contents of the web page: "+result);
+        String[] arr = result.split(":", 6);
+        String total = arr[5];
+        total = total.replace("}", "");
+
+        double absoluteTotal = Double.parseDouble(total);
+        absoluteTotal = Math.round(absoluteTotal * 100.0) / 100.0;
+
+        return(String.valueOf(absoluteTotal));
+
+
+    }
+
+
+}
