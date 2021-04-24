@@ -60,7 +60,8 @@ public class FragmentFood extends Fragment {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}});
 
-        TextView textViewResult = v.findViewById(R.id.textViewResult);
+        TextView textViewResult1 = v.findViewById(R.id.textViewResult1);
+        TextView textViewResult2 = v.findViewById(R.id.textViewResult2);
         Button buttonCalculate = v.findViewById(R.id.buttonCalculate);
         EditText editTextBeef = v.findViewById(R.id.editTextBeef);
         EditText editTextPork = v.findViewById(R.id.editTextPork);
@@ -100,7 +101,8 @@ public class FragmentFood extends Fragment {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    textViewResult.setText(total);
+                    textViewResult1.setText("Your emission estimate is:");
+                    textViewResult2.setText( total + " kg CO2 / year");
                 }
 
             }});
