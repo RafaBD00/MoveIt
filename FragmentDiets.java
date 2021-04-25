@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -30,7 +29,7 @@ public class FragmentDiets extends Fragment {
                 "DietList", Context.MODE_PRIVATE);
         String work = sharedPreferences.getString(activeUserData.getUsername(), "Remember to drink a lot of water\nRemember to sleep 8 hours a night\nExcersice at least 5 times a week\n");
         editTextDiets.setText(work);
-        // Saves the changes made by the user automatically to the file.
+        // Saves the changes made by the user automatically to the file after the change have been made.
         editTextDiets.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
