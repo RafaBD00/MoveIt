@@ -1,7 +1,6 @@
 package com.example.movet;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,7 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -26,6 +24,8 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
+
+// This is a register window that allows users to make new accounts.
 
 public class RegisterActivity extends AppCompatActivity {
     private ActiveUserData activeUserData = ActiveUserData.getInstance();
@@ -61,7 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {}});
     }
 
-    // Checks if info is given correctly and fulfills requirements
+    // Checks if info is given correctly and password fulfills requirements
     // and then adds them to a SharedPreference "UserInfo".
 
     public void onRegister(View view) {
@@ -77,7 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
         } else {
 
             // Checks if password fulfills requirements. Booleans keep track of which requirements
-            // are fulfilled and which aren't.
+            // are fulfilled and which aren't. If some requirements aren't fulfilled, a toast message will be shown on the screen.
 
             boolean number = false;
             boolean big = false;
@@ -92,7 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
                             if (Character.isDigit(c)) {
                                 number = true; } }
                         if (!big) {
-                            if (c >= 'A' && c <= 'z') {
+                            if (c >= 'A' && c <= 'Z') {
                                 big = true; } }
                         if (!small) {
                             if (c >= 'a' && c <= 'z') {
@@ -119,6 +119,9 @@ public class RegisterActivity extends AppCompatActivity {
                 editTextConfirmed.setText("");
                 Toast.makeText(this, "Passwords doesn't fulfill given requirements!",
                         Toast.LENGTH_LONG).show();
+                
+                // Checks if the username is already used.
+                
             } else if (!(notUsed = checkIfTaken(username))) {
                 editTextUsername.setText("");
                 Toast.makeText(this, "Username already used!", Toast.LENGTH_LONG).show();
