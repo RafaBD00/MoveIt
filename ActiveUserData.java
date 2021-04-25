@@ -5,7 +5,6 @@ package com.example.movet;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
