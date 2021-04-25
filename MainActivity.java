@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -51,7 +50,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             SharedPreferences preferences = getSharedPreferences("LastOpenWindow", 0);
             String lastOpened = preferences.getString(activeUserData.getUsername(), "nav_home");
 
-            // Here the program opens the window that was the last one open before the app was closed
+            // Here the program opens the window that was the last one open before the app was closed.
+            // If it's a first time the home page will be opened.
 
             switch (lastOpened) {
                 case "nav_home":
