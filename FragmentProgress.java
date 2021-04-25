@@ -11,17 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -34,8 +31,8 @@ public class FragmentProgress extends Fragment {
     private TextView textViewNormalBMI;
     private BarChart barChart;
 
-    // This page shows how the users weight has changed, allows the user to update their weight and
-    // counts BMI for the user.
+    // This page shows how the users weight has changed, allows the user to update their weight and height and also
+    // counts the users BMI.
 
     @Nullable
     @Override
@@ -52,10 +49,13 @@ public class FragmentProgress extends Fragment {
             @Override
             public void onClick(View v) {
                 // Updates the users current weight. Adds it to the ActiveUserData as the current weight
-                // and also adds it to "WeightStorage".
+                // and also adds it to the "WeightStorage".
                 String newWeight = editTextAddWeight.getText().toString();
                 editTextAddWeight.setText("");
                 boolean result = true;
+                
+                // Checks that the given weight is not empty abd it contains only numbers
+                
                 if (newWeight.equals("")) {
                     result = false;
                 }
@@ -80,6 +80,9 @@ public class FragmentProgress extends Fragment {
                 // Updates the users height. Adds the height to ActiveUserData as current height.
                 String height = editTextUpdateWeight.getText().toString();
                 editTextUpdateWeight.setText("");
+                
+                // Checks that the given height is not empty and it contains only numbers
+                
                 boolean ifNumber = true;
                 if (height.equals("")) {
                     ifNumber = false;
@@ -114,7 +117,7 @@ public class FragmentProgress extends Fragment {
         return v;
     }
 
-    // Creates the BarChart that displays the users weight changes
+    // Creates the BarChart that displays the users weight changes. The chart displays a max 20 values.
 
     public void createChart() {
         barChart.invalidate();
