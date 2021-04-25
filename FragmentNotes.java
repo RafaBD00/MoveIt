@@ -13,14 +13,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import org.w3c.dom.Text;
-
 import java.util.Objects;
+
+// This is the notes page where the user can make and read his/her notes.
 
 public class FragmentNotes extends Fragment {
     private final ActiveUserData activeUserData = ActiveUserData.getInstance();
@@ -32,11 +31,15 @@ public class FragmentNotes extends Fragment {
         TextView textView = v.findViewById(R.id.textView2);
         textView.setText("Notes");
         EditText field = v.findViewById(R.id.EditNote);
+        
+        // Reads the notes that the user has given and displays them to the editText.
+        
         SharedPreferences preference = Objects.requireNonNull(getContext()).getSharedPreferences("SaveNote", Context.MODE_PRIVATE);
-        String text = preference.getString(activeUserData.getUsername(), "Write");
+        String text = preference.getString(activeUserData.getUsername(), "");
         field.setText(text);
-
-
+        
+        // Updates the file automatically everytime the user makes changes to the editText.
+        
         field.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
