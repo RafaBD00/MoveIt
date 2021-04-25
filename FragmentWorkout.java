@@ -14,11 +14,9 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import java.util.Objects;
 
 public class FragmentWorkout extends Fragment {
@@ -32,9 +30,15 @@ public class FragmentWorkout extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_workout, container, false);
         editTextWorkout = (EditText) v.findViewById(R.id.editTextWorkout);
+        
         // Put's all the workouts to the editText for the user to read.
+        
         SharedPreferences sharedPreferences = Objects.requireNonNull(getContext()).getSharedPreferences(
                 "WorkoutPlans", Context.MODE_PRIVATE);
+        
+        // When the user registers and opens the app for the first time there is a one default workout in the page. 
+        // The user can delete it of course.
+        
          String work = sharedPreferences.getString(activeUserData.getUsername(), "Workout 1:\n" +
                         "- 10 x push-ups , 4 sets\n" +
                         "- 10 x dips , 4 sets\n" +
@@ -42,7 +46,9 @@ public class FragmentWorkout extends Fragment {
                         "- 7 x pull-ups, 3 sets\n" +
                         "-------------------------------------------------------------------------");
         editTextWorkout.setText(work);
+        
         // Saves the changes made by the user automatically to the file.
+        
         editTextWorkout.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
