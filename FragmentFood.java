@@ -17,8 +17,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
-
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -77,7 +75,7 @@ public class FragmentFood extends Fragment {
         EditText editTextRestaurant = v.findViewById(R.id.editTextRestaurant);
         
         // After the button is pressed, it takes all the values in the editTexts and creates an URL. If some of the editTexts are empty or have too big values,
-        // Toast message is shown.
+        // toast message is shown.
         
         buttonCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,9 +116,7 @@ public class FragmentFood extends Fragment {
     // This function takes all the values needed for the URL as parameters and creates it. Then reads the XML page and return the total emission estimate
     // rounded for 2 decimals.
 
-    public String findTotal(String diet, String emission, String beef, String pork, String fish,
-                            String dairy, String cheese, String rice, String egg, String salad,
-                            String restaurant) throws IOException {
+    public String findTotal(String diet, String emission, String beef, String pork, String fish, String dairy, String cheese, String rice, String egg, String salad, String restaurant) throws IOException {
         String url = "https://ilmastodieetti.ymparisto.fi/ilmastodieetti/calculatorapi/v1/FoodCalculator?query.diet="
                 + diet + "&query.lowCarbonPreference=" + emission + "&query.beefLevel=" + beef + "&query.fishLevel="
                 + fish + "&query.porkPoultryLevel=" + pork + "&query.dairyLevel=" +  dairy + "&query.cheeseLevel="
@@ -132,14 +128,24 @@ public class FragmentFood extends Fragment {
         while(sc.hasNext()) {
             sb.append(sc.next());
         }
-        //Retrieving the String from the String Buffer object
+        
+        //Retrieves the String from the String Buffer object
+        
         String result = sb.toString();
-        //Removing the HTML tags
+        
+        //Removes the HTML tags
+        
         result = result.replaceAll("<[^>]*>", "");
         String[] arr = result.split(":", 6);
         String total = arr[5];
+        
+        // Removes the "}" at the end of the number
+        
         total = total.replace("}", "");
         double absoluteTotal = Double.parseDouble(total);
+        
+        // Rounds the double.
+        
         absoluteTotal = Math.round(absoluteTotal * 100.0) / 100.0;
         return(String.valueOf(absoluteTotal));
     }
